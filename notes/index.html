@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <h1><a href="/">pls be patient</a></h1>
+        <ul>
+            <li><a href="/logs">/logs</a></li>
+            <li><a href="/notes">/notes</a></li>
+            <li><a href="/status">/status</a></li>
+        </ul>
+    </nav>
+    <main id="content">
+        <h1>Notes</h1>
+        <div id="note-list"></div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+    <script>
+        const notes = [
+            { title: 'Note 1', file: 'notes/note1.md' },
+            { title: 'Note 2', file: 'notes/note2.md' }
+        ];
+
+        const noteList = document.getElementById('note-list');
+        const content = document.getElementById('content');
+
+        const ul = document.createElement('ul');
+        notes.forEach(note => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = '#';
+            a.textContent = note.title;
+            a.onclick = (e) => {
+                e.preventDefault();
+                loadNote(note.file);
+            };
+            li.appendChild(a);
+            ul.appendChild(li);
+        });
+        noteList.appendChild(ul);
+
+        async function loadNote(file) {
+            const response = await fetch(file);
+            const markdown = await response.text();
+            content.innerHTML = '<h2>Note</h2>' + marked.parse(markdown);
+        }
+    </script>
+</body>
+</html>

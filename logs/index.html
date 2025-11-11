@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <h1><a href="/">pls be patient</a></h1>
+        <ul>
+            <li><a href="/logs">/logs</a></li>
+            <li><a href="/notes">/notes</a></li>
+            <li><a href="/status">/status</a></li>
+        </ul>
+    </nav>
+    <main id="content">
+        <h1>Logs</h1>
+        <div id="log-list"></div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+    <script>
+        const logs = [
+            { title: 'First Log', file: 'note1.md', date: 'January 15th, 2024' },
+            { title: 'First Log', file: 'note1.md', date: 'January 15th, 2024' },
+        ];
+
+        const logList = document.getElementById('log-list');
+        const content = document.getElementById('content');
+
+        // Create timeline list
+        const ul = document.createElement('ul');
+        logs.forEach(log => {
+            const li = document.createElement('li');
+            li.className = 'entry-item';
+
+            const span = document.createElement('span');
+            const a = document.createElement('a');
+            a.className = 'list-link';
+            a.href = '#';
+            a.textContent = log.title;
+            a.onclick = (e) => {
+                e.preventDefault();
+                loadLog(log.file);
+            };
+            span.appendChild(a);
+
+            const metaDiv = document.createElement('div');
+            metaDiv.className = 'entry-meta';
+            const dateSpan = document.createElement('span');
+            dateSpan.className = 'entry-date';
+            dateSpan.textContent = log.date;
+            metaDiv.appendChild(dateSpan);
+
+            li.appendChild(span);
+            li.appendChild(metaDiv);
+            ul.appendChild(li);
+        });
+        logList.appendChild(ul);
+
+        async function loadLog(file) {
+            const response = await fetch(file);
+            const markdown = await response.text();
+            content.innerHTML = '<h2>Log Entry</h2>' + marked.parse(markdown);
+        }
+    </script>
+</body>
+</html>
