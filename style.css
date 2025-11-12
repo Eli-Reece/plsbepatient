@@ -8,6 +8,14 @@ h1 {
     font-size: 30px;
 }
 
+a, a:visited, a:active {
+    color: #333;
+    text-decoration: none;
+}
+ a:hover {
+    text-decoration:underline;
+}
+
 body {
     font-family: 'Rethink Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     display: flex;
@@ -132,4 +140,24 @@ main pre code {
 
 .entry-date {
     white-space: nowrap;
+}
+
+.warning-block {
+    border-left: 5px solid #fca311;
+    background: #fffbe7;
+    padding: 0.5em;
+    margin: 1em 0;
+    color: #874c00;
+    font-family: inherit;
+    border-radius: 6px;
+}
+
+.info-block {
+    border-left: 5px solid #0074d9;
+    background: #e8f6ff;
+    padding: 0.5em;
+    margin: 1em 0;
+    color: #004080;
+    font-family: inherit;
+    border-radius: 6px;
 }

@@ -11,18 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- highlight.js styles -->
     <link rel="stylesheet" href="https://unpkg.com/highlight.js@11.9.0/styles/github.min.css">
-    <!-- Optional: Style for warning block -->
-    <style>
-      .warning-block {
-        border-left: 5px solid #fca311;
-        background: #fffbe7;
-        padding: 0.5em;
-        margin: 1em 0;
-        color: #874c00;
-        font-family: inherit;
-        border-radius: 6px;
-      }
-    </style>
 </head>
 <body>
     <nav>
@@ -77,13 +65,33 @@
               renderer(token) {
                 return `<div class="warning-block">${marked.parser(token.tokens)}</div>`;
               }
+            },
+            {
+              name: 'info',
+              level: 'block',
+              start(src) { return src.match(/:::/)?.index; },
+              tokenizer(src) {
+                const rule = /^:::info\s+([\s\S]+?):::/;
+                const match = rule.exec(src);
+                if (match) {
+                  return {
+                    type: 'info',
+                    raw: match[0],
+                    text: match[1].trim(),
+                    tokens: this.lexer.inlineTokens(match[1].trim()),
+                  };
+                }
+              },
+              renderer(token) {
+                return `<div class="info-block">${marked.parser(token.tokens)}</div>`;
+              }
             }
           ]
         });
 
         const notes = [
-            { title: 'Arch STM32 Guide', file: 'archstm32.md', date: 'January 15th, 2024' },
-            { title: 'BeagleBone Quick Build', file: 'bbb_quickbuild.md', date: 'January 15th, 2024' },
+            { title: 'Arch STM32 Guide', file: 'archstm32.md', date: 'August 8th, 2024' },
+            { title: 'BeagleBone Quick Build', file: 'bbb_quickbuild.md', date: 'March 2nd, 2025' },
         ];
 
         const noteList = document.getElementById('note-list');
@@ -122,7 +130,7 @@
         async function loadNote(file) {
             const response = await fetch(file);
             const markdown = await response.text();
-            content.innerHTML = '<h1>Notes</h1>' + marked.parse(markdown);
+            content.innerHTML = '<h1><a href="/notes">Notes</a></h1>' + marked.parse(markdown);
 
             // Highlight code blocks after HTML
             document.querySelectorAll('pre code').forEach(block => {

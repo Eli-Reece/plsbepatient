@@ -1,12 +1,17 @@
-### My System Info
+# BeagleBone Black Quick Build
 
-- Arch Linux x86_64
-- 6.15.7-arch1-1
+## Useful Links
 
-### Useful Links
-- [AM335x Sitara Processor Datasheet](https://www.ti.com/lit/ds/symlink/am3358.pdf)
+:::info
+[AM335x Sitara Processor Datasheet](https://www.ti.com/lit/ds/symlink/am3358.pdf)
+:::
 
-### Initial Project Setup
+## My System Info
+
+Arch Linux x86_64
+6.15.7-arch1-1
+
+## Initial Project Setup
 
 ```bash
 mkdir beaglebone && cd beaglebone
@@ -15,7 +20,7 @@ mkdir images
 mkdir toolchain && cd toolchain
 ```
 
-### Install Cross-Compiler Toolchain
+## Install Cross-Compiler Toolchain
 
 Get a toolchain from arm or build your own using crosstool if you want.
 
