@@ -27,7 +27,7 @@
     </main>
 
     <!-- Marked -->
-    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
     <!-- Highlight.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>
@@ -130,7 +130,7 @@
         async function loadNote(file) {
             const response = await fetch(file);
             const markdown = await response.text();
-            content.innerHTML = '<h1><a href="/notes">Notes</a></h1>' + marked.parse(markdown);
+            content.innerHTML = '<h1><a href="/notes" class="back-link">Notes</a></h1>' + marked.parse(markdown);
 
             // Highlight code blocks after HTML
             document.querySelectorAll('pre code').forEach(block => {

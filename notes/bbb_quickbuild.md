@@ -1,11 +1,5 @@
 # BeagleBone Black Quick Build
 
-## Useful Links
-
-:::info
-[AM335x Sitara Processor Datasheet](https://www.ti.com/lit/ds/symlink/am3358.pdf)
-:::
-
 ## My System Info
 
 Arch Linux x86_64
@@ -22,14 +16,10 @@ mkdir toolchain && cd toolchain
 
 ## Install Cross-Compiler Toolchain
 
-Get a toolchain from arm or build your own using crosstool if you want.
+Get a [toolchain] from arm or build your own using crosstool if you want.
 
-> https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
-
-The beaglebone black has the Sitara AM3358BZCZ100 which is an ARM Cortex-A8
-32-bit Microprocessor.
-
-So I need a x86_64 hosted cross toolchain for an
+The BeagleBone Black has the Sitara AM3358BZCZ100 which is an ARM Cortex-A8
+32-bit Microprocessor so it requires an x86_64 host cross toolchain for
 aarch32 GNU/Linux target with hard float (arm-none-linux-gnueabihf) 
 
 ```bash
@@ -52,7 +42,8 @@ Now we can build the bootloader thats gonna be able to control our flash
 memory, load the kernel, device-tree blob, etc.
 
 ```bash
-git clone --depth=1 https://github.com/u-boot/u-boot # or you can clone the whole source to easily see the tags
+# or you can clone the whole source to easily see the tags
+git clone --depth=1 https://github.com/u-boot/u-boot
 cd u-boot
 git ls-remote --tags origin # looking for latest release (non-candidate)
 git fetch --depth=1 origin tag v2025.07
@@ -91,13 +82,12 @@ the kernel environment.
 
 ### Build the Kernel
 
-!!! info "Note:"
-    I didn't really choose 6.15 for any particular reason other than it was
-    recent
+:::info
+I didn't really choose 6.15 for any particular reason other than it was recent
+:::
 
 ```bash
 git clone --depth 1 -b v6.15 https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/
-
 cd linux
 make ARCH=${ARCH} CROSS_COMPILE=${CC} omap2plus_defconfig
 make ARCH=${ARCH} CROSS_COMPILE=${CC} -j$(nproc)
@@ -129,3 +119,4 @@ bootargs=console=ttyO0,115200n8 root=/dev/mmcblk0p2 rw rootwait
 uenvcmd=fatload mmc 0:1 0x80200000 zImage; fatload mmc 0:1 0x80f00000 am335x-boneblack.dtb; fatload mmc 0:1 0x82000000 initramfs.cpio.gz; bootz 0x80200000 0x82000000 0x80f00000
 ```
 
+[toolchain]: https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads

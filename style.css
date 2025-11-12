@@ -8,11 +8,12 @@ h1 {
     font-size: 30px;
 }
 
-a, a:visited, a:active {
+.back-link, .back-link:visited, .back-link:active {
     color: #333;
     text-decoration: none;
 }
- a:hover {
+
+a:hover {
     text-decoration:underline;
 }
 
