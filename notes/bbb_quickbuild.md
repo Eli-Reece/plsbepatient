@@ -1,9 +1,8 @@
 # BeagleBone Black Quick Build
 
-## My System Info
+## My Host System Info
 
-Arch Linux x86_64
-6.15.7-arch1-1
+Arch Linux x86_64 (6.15.7-arch1-1)
 
 ## Initial Project Setup
 
@@ -16,7 +15,7 @@ mkdir toolchain && cd toolchain
 
 ## Install Cross-Compiler Toolchain
 
-Get a [toolchain] from arm or build your own using crosstool if you want.
+Get a [toolchain] from Arm or build your own using crosstool if you want.
 
 The BeagleBone Black has the Sitara AM3358BZCZ100 which is an ARM Cortex-A8
 32-bit Microprocessor so it requires an x86_64 host cross toolchain for
@@ -66,21 +65,27 @@ The MLO and u-boot.img which should be in the u-boot root dir.
 cp MLO u-boot.img ../images
 ```
 
-### BeagleBone First 3 Stages
+## BeagleBone First 3 Stages
 
-On powerup, the firststage bootloader runs from the internal Boot ROM. This is
+### Power Up / First Stage
+
+The firststage bootloader runs from the internal Boot ROM. This is
 code written during the manufacturing process and cannot be altered. This code
 reads the boot configuration pins to determine where to load the next
 bootloader. The bootloader is going init minimal hardware and then access the
 first partition (which must be in FAT format), loading the MLO.
 
+### Second Stage
+
 The MLO (MMC Card Loader) is the second-stage bootloader. This mainly serves to
 initialize the external DDR memory and set-up the boot process for u-boot.
+
+### Third Stage / Tertiary
 
 Our third or tertiary bootloader is U-Boot which gives us command control over
 the kernel environment.
 
-### Build the Kernel
+## Build the Kernel
 
 :::info
 I didn't really choose 6.15 for any particular reason other than it was recent
@@ -95,17 +100,18 @@ cp /arch/arm/boot/zImage ~/<proj>/images
 cp /arch/arm/boot/dts/am335x-boneblack.dtb ~/<proj>/images
 ```
 
-### Get a RFS
+## Get a RFS
 
 ```bash
 yay -Syu debootstrap
 ```
 
-### Format SD card
+## Format SD card
 
-I forgot to take notes but its not hard
+TODO (forgot to take notes)
 
-### U-boot arguments
+## U-boot arguments
+
 ```bash
 setenv bootargs console=ttyO0,115200 root=/dev/mmcblk0p2 rw rootwait
 setenv bootcmd 'fatload mmc 0:1 0x80200000 zImage; fatload mmc 0:1 0x80F00000 am335x-boneblack.dtb; bootz 0x80200000 - 0x80F00000'
@@ -116,7 +122,7 @@ boot
 ```bash
 uboot.env
 bootargs=console=ttyO0,115200n8 root=/dev/mmcblk0p2 rw rootwait
-uenvcmd=fatload mmc 0:1 0x80200000 zImage; fatload mmc 0:1 0x80f00000 am335x-boneblack.dtb; fatload mmc 0:1 0x82000000 initramfs.cpio.gz; bootz 0x80200000 0x82000000 0x80f00000
+uenvcmd=fatload mmc 0:1 0x80200000 zImage; fatload mmc 0:1 0x80F00000 am335x-boneblack.dtb; fatload mmc 0:1 0x82000000 initramfs.cpio.gz; bootz 0x80200000 0x82000000 0x80F00000
 ```
 
 [toolchain]: https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
