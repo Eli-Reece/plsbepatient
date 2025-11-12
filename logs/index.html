@@ -66,7 +66,7 @@
         async function loadLog(file) {
             const response = await fetch(file);
             const markdown = await response.text();
-            content.innerHTML = '<h2>Log Entry</h2>' + marked.parse(markdown);
+            content.innerHTML = '<h1>Logs</h1>' + marked.parse(markdown);
         }
     </script>
 </body>

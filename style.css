@@ -81,7 +81,7 @@ main h1 {
 
 main p {
     line-height: 1.6;
-    margin-bottom: 1em;
+    margin-bottom: 0em;
     font-size: 1.2em;
 }
 
