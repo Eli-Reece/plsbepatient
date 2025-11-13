@@ -1,19 +1,22 @@
-### Overview
+# C - Function Pointers
+
+## Overview
 A function pointer is a variable that stores the address of a function that can
 be called later through that pointer
 
-### Use cases
+## Use cases
 
-- callback functions
-	- functions that are passed as arguments to other functions
-- dynamic dispatch
-- state machines
-	- pointers that are used to transfer between states
-- dynamic plug-in mechanisms
-	- allows an application to dynamically use different plug-ins or modules at runtime
-- ISRs
+callback functions: functions that are passed as arguments to other functions
 
-### Syntax
+dynamic dispatch
+
+state machines: pointers that are used to transfer between states
+
+dynamic plug-in mechanisms: allows an application to dynamically use different plug-ins or modules at runtime
+
+ISRs
+
+## Syntax
 
 ```c
 ret_type (*funcptr_name)( funcargs_datatypes ) = <func_to_point_to> 
@@ -26,6 +29,7 @@ int add( int a, int b )
 {
 	return a+b;
 }
+
 int sub( int a, int b )
 {
 	return a-b;
@@ -52,21 +56,20 @@ void* (*foo)( int* );
 
 ### Example 3
 
-- From Example 1
 ```c
 int (*pFun)( int, int ) = add;
 // or
 int (*pFun)( int, int );
 pFun = &add;
-// The ampersand is optional!
+// The ampersand is optional
 
 int sum = pFun( 3, 2 );
 // or
 int sum = (*pFun)( 3, 2 );
-// The dereference is optional!
+// The dereference is optional
 ```
 
-### Argument Syntax
+## Argument Syntax
 ```c
 // Exact same as for definitions
 void function( ..., ret_type (*funcname)( funcargs_datatypes ), ... ){...}

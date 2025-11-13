@@ -1,4 +1,6 @@
-summary: Write function(s) to determine if the stack grows up or down
+# Check Stack Growth Direction
+
+Short program to determine if the stack grows up or down
 
 ```c
 void __check_stack_direction(int *first_var) {
