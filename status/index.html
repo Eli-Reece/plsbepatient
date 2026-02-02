@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- highlight.js styles -->
+    <link rel="stylesheet" href="https://unpkg.com/highlight.js@11.9.0/styles/github.min.css">
+</head>
+<body>
+    <nav>
+        <h1><a href="/">pls be patient</a></h1>
+        <ul>
+            <li><a href="/logs">/logs</a></li>
+            <li><a href="/notes">/notes</a></li>
+            <li><a href="/status">/status</a></li>
+        </ul>
+    </nav>
+    <main id="content">
+        <h1>Status</h1>
+        <div id="entry-list"></div>
+    </main>
+
+    <!-- Marked -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
+    <!-- Highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Entry config injection -->
+    <script>
+      window.entryConfig = {
+        type: "status",
+        list: [
+        ],
+        backLabel: "Status",
+        backLink: "/status"
+      }
+    </script>
+    <!-- Shared JS -->
+    <script src="../entryList.js"></script>
+</body>
+</html>

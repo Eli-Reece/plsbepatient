@@ -23,14 +23,25 @@
     </nav>
     <main id="content">
         <h1>Logs</h1>
-        <div id="log-list"></div>
+        <div id="entry-list"></div>
     </main>
 
     <!-- Marked -->
     <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
     <!-- Highlight.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <!-- Custom js -->
-    <script src="logs.js"></script>
+    <!-- Entry config injection -->
+    <script>
+      window.entryConfig = {
+        type: "logs",
+        list: [
+          { title: 'MCUs & MPUs: RP2040-Zero', file: 'rp2040zero.md', date: 'Feb 1st, 2026' }
+        ],
+        backLabel: "Logs",
+        backLink: "/logs"
+      }
+    </script>
+    <!-- Shared JS -->
+    <script src="../entryList.js"></script>
 </body>
 </html>

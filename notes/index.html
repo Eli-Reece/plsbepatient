@@ -23,14 +23,36 @@
     </nav>
     <main id="content">
         <h1>Notes</h1>
-        <div id="note-list"></div>
+        <div id="entry-list"></div>
     </main>
 
     <!-- Marked -->
     <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
     <!-- Highlight.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <!-- Custom js -->
-    <script src="notes.js"></script>
+    <!-- Entry config injection -->
+    <script>
+      window.entryConfig = {
+        type: "notes",
+        list: [
+            { title: 'Teensy on Arch', file: 'teensyarch.md', date: 'February 1st, 2026' },
+            { title: 'Arch STM32 Guide', file: 'archstm32.md', date: 'August 8th, 2024' },
+            { title: 'Arm GIC Enabler', file: 'armgicenabler.md', date: 'August 11th, 2024' },
+            { title: 'BeagleBone Quick Build', file: 'bbb_quickbuild.md', date: 'March 2nd, 2025' },
+            { title: 'STM32 - MPU-6050', file: 'stm32mpu-6050.md', date: 'March 2nd, 2025' },
+            { title: 'BeagleBone Black BusyBox', file: 'busyboxrfs.md', date: 'June 6th, 2024' },
+            { title: 'C - Function Pointers', file: 'funcptrs.md', date: 'June 15th, 2024' },
+            { title: 'sed Quick Reference', file: 'sed.md', date: 'June 15th, 2024' },
+            { title: 'Sysfs Kernel Programming', file: 'sysfs.md', date: 'June 15th, 2024' },
+            { title: 'SVN Quick Reference', file: 'svn.md', date: 'August 4th, 2023' },
+            { title: 'Stack Growth Direction', file: 'stackdirection.md', date: 'August 4th, 2023' },
+            { title: 'Baremetal Arm QEMU', file: 'qemu_baremetal.md', date: 'August 4th, 2023' }
+        ],
+        backLabel: "Notes",
+        backLink: "/notes"
+      }
+    </script>
+    <!-- Shared JS -->
+    <script src="../entryList.js"></script>
 </body>
 </html>
