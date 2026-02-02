@@ -57,28 +57,16 @@ document.addEventListener('DOMContentLoaded', function() {
       ]
     });
 
-    const notes = [
-        { title: 'Teensy on Arch', file: 'teensyarch.md', date: 'February 1st, 2026' },
-        { title: 'Arch STM32 Guide', file: 'archstm32.md', date: 'August 8th, 2024' },
-        { title: 'Arm GIC Enabler', file: 'armgicenabler.md', date: 'August 11th, 2024' },
-        { title: 'BeagleBone Quick Build', file: 'bbb_quickbuild.md', date: 'March 2nd, 2025' },
-        { title: 'STM32 - MPU-6050', file: 'stm32mpu-6050.md', date: 'March 2nd, 2025' },
-        { title: 'BeagleBone Black BusyBox', file: 'busyboxrfs.md', date: 'June 6th, 2024' },
-        { title: 'C - Function Pointers', file: 'funcptrs.md', date: 'June 15th, 2024' },
-        { title: 'sed Quick Reference', file: 'sed.md', date: 'June 15th, 2024' },
-        { title: 'Sysfs Kernel Programming', file: 'sysfs.md', date: 'June 15th, 2024' },
-        { title: 'SVN Quick Reference', file: 'svn.md', date: 'August 4th, 2023' },
-        { title: 'Stack Growth Direction', file: 'stackdirection.md', date: 'August 4th, 2023' },
-        { title: 'Baremetal Arm QEMU', file: 'qemu_baremetal.md', date: 'August 4th, 2023' },
-        { title: 'Arch Teensy', file: 'teensyarch.md', date: 'November 15th, 2025' },
+    const logs = [
+        { title: 'MCUs & MPUs: RP2040-Zero', file: 'rp2040zero.md', date: 'Feb 1st, 2026' },
     ];
 
-    const noteList = document.getElementById('note-list');
+    const logList = document.getElementById('log-list');
     const content = document.getElementById('content');
 
     // Create timeline list
     const ul = document.createElement('ul');
-    notes.forEach(note => {
+    logs.forEach(log => {
         const li = document.createElement('li');
         li.className = 'entry-item';
 
@@ -86,10 +74,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const a = document.createElement('a');
         a.className = 'list-link';
         a.href = '#';
-        a.textContent = note.title;
+        a.textContent = log.title;
         a.onclick = (e) => {
             e.preventDefault();
-            loadNote(note.file);
+            loadLog(log.file);
         };
         span.appendChild(a);
 
@@ -97,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
         metaDiv.className = 'entry-meta';
         const dateSpan = document.createElement('span');
         dateSpan.className = 'entry-date';
-        dateSpan.textContent = note.date;
+        dateSpan.textContent = log.date;
         metaDiv.appendChild(dateSpan);
 
         li.appendChild(span);
@@ -106,11 +94,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     noteList.appendChild(ul);
 
-    async function loadNote(file) {
+    async function loadLog(file) {
         const response = await fetch(file);
         const markdown = await response.text();
-        content.innerHTML = '<h1><a href="/notes" class="back-link">Notes</a></h1>' + marked.parse(markdown);
-
+        content.innerHTML = '<h1><a href="/logs" class="back-link">Logs</a></h1>' + marked.parse(markdown);
         // Highlight code blocks after HTML
         document.querySelectorAll('pre code').forEach(block => {
             if (window.hljs) hljs.highlightElement(block);
