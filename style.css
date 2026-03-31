@@ -1,3 +1,6 @@
+html {
+    font-size: 125%
+}
 * {
     margin: 0;
     padding: 0;
@@ -116,6 +119,13 @@ main pre code {
  main ul {
     list-style: none;
     padding-left: 0;
+}
+
+#content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 2rem auto;
 }
 
 .entry-item {
