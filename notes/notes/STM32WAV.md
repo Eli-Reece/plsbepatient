@@ -47,7 +47,7 @@ A Reliable 5V supply
 - See [this link](https://macsbug.wordpress.com/wp-content/uploads/2021/02/pcm5102a_dac_schematic_600s-min.png) for more info on the PCM5102
 
 ## CubeMX
-- See my [post](https://elishareece.com/posts/archstm32/) on my Arch STM32 workflow
+- See my post on my Arch STM32 workflow
 ### Clock Configuration
 - Set it to 100MHz cus why not
 ### USART2 - Debug/Printf()
